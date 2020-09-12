@@ -1,0 +1,4 @@
+*.pyc
+.env
+private_sites.py
+__pycache__/
