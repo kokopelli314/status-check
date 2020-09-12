@@ -9,11 +9,18 @@ If a URL is expected to return a 200 status, this script will send you an email 
 Clone this repo and create a module `src/private_sites.py`. For each site you want to check, implement a subclass of the `Site` class. For instance:
 
 ```python
-class Homepage(Site):                                
-        def __init__(self):                          
+from Site import Site
+from typing import List
+
+class Homepage(Site):                          
+        def __init__(self):
                 self.url = 'https://nathanclonts.com'
-                self.expectedStatus = 200            
-                self.name = 'Homepage'               
+                self.expectedStatus = 200
+                self.name = 'Homepage'
+
+exports: List[Site] = [
+        Homepage(),
+]
 ```
 
 Create a `.env` file giving the SMTP credentials with which to send emails when you get a bad status.
@@ -21,7 +28,7 @@ Create a `.env` file giving the SMTP credentials with which to send emails when 
 Then trigger the `main.py` script with a cron job. For example:
 
 ```bash
-# Check system statuses & send warning emails if needed
+# Check system statuses every 5 minutes & send warning emails if needed
 */5 * * * *  ( sleep 30 ; /home/{my-user}/.virtualenvs/status-check/bin/python ~/status-check/src/main.py > ~/cron-test-status-check.log 2>&1 )
 ```
 
