@@ -22,7 +22,6 @@ Then trigger the `main.py` script with a cron job. For example:
 
 ```bash
 # Check system statuses & send warning emails if needed
-# Do it 30 seconds after the minute in case target systems reboot on the minute
 */5 * * * *  ( sleep 30 ; /home/{my-user}/.virtualenvs/status-check/bin/python ~/status-check/src/main.py > ~/cron-test-status-check.log 2>&1 )
 ```
 
